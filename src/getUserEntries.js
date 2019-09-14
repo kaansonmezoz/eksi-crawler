@@ -15,3 +15,8 @@ const getUserEntries = (url) => {
 
     var entry = getEntry(topicDiv);
 }
+
+
+const openAllEntries = (url) => {
+    
+}
