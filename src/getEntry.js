@@ -1,9 +1,5 @@
 const cheerio  = require('cheerio');
 
-module.exports = {
-    getUserEntry
-}
-
 const getUserEntry = (divTopicItem) => {
     // html div class="topic-item" olan bir html tagi.
     
@@ -22,4 +18,8 @@ const getUserEntry = (divTopicItem) => {
         entry,
         date
     };    
+};
+
+module.exports = {
+    getUserEntry
 }
