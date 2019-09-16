@@ -2,10 +2,9 @@ const puppeteer = require('puppeteer');
 
 const username = "sekilli-nick";
 
-
-    const browser =  puppeteer.launch().then(async browser => {
+const browser =  puppeteer.launch().then(async browser => {
         const page =  await browser.newPage();
-        const pageResponse =  await page.goto(`https://eksisozluk.com/biri/${username}`);
+        await page.goto(`https://eksisozluk.com/biri/${username}`);
         
         //console.log(await pageResponse.text());
 
@@ -14,8 +13,12 @@ const username = "sekilli-nick";
         });
 
         console.log(textHtml);
+
+        page.close();
     }).catch(err => {
         console.log(err);
     });
+
+
     
 

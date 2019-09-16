@@ -1,3 +1,4 @@
+/*
 const cheerio  = require('cheerio');
 
 const request = require('request');
@@ -54,16 +55,16 @@ request(`https://eksisozluk.com/biri/${username}`, {}, (error, response, body) =
 
     console.log(a.text())
 
-    /*
+    
 
-    console.log(a.html());
+    //console.log(a.html());
 
 
-    $ = cheerio.load(body);
-    a = $("div #profile-stats-section-content")
+    //$ = cheerio.load(body);
+    //a = $("div #profile-stats-section-content")
 
-    console.log(a.html());
-    */
+    //console.log(a.html());
+    
 
     // request verileri su sekilde 
     // https://eksisozluk.com/son-entryleri?nick=sekilli%20nick&p=1&_=1568162012350
@@ -71,4 +72,43 @@ request(`https://eksisozluk.com/biri/${username}`, {}, (error, response, body) =
     // bu son kısım bizim için önemli oradaki id ne hiç bilmiyorum. _=.... kısmı lazım bize
     // cunku her daha fazla data yükelndiğinde hem page number bir artıyor hem de o garip veri bir artıyor
 
+});
+
+*/
+
+
+
+
+
+const puppeteer = require('puppeteer');
+const {PendingXHR} = require('pending-xhr-puppeteer');
+
+const username = "sekilli-nick";
+
+var html;
+
+// TODO: asagidaki kodu bir sekilde fonksiyon haline getirmek lazim aslında yapmamız gereken sey bu
+// TODO: bir de exception firlattirmadan su while'i cozebilsek guzel olurdu aslında 
+
+puppeteer.launch().then(async browser => {    
+    const page =  await browser.newPage();
+        const pendingXHR = new PendingXHR(page);
+
+        await page.goto(`https://eksisozluk.com/biri/${username}`);        
+
+        try{
+            while(1){
+                await page.click('a.load-more-entries');
+                await pendingXHR.waitForAllXhrFinished();               
+                
+                html = await page.content();
+            }
+        }
+        catch(error){
+            console.log(html);
+        }
+
+        browser.close();
+}).catch((err) => {    
+    console.log(err);
 });
