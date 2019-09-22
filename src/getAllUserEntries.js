@@ -17,6 +17,12 @@ const getUserEntries = (username) => {
                 let username = $(element).find('li').attr('data-author');
                 let userId = $(element).find('li').attr('data-author-id');
                 let entry = $(element).find('.content').text().trim();
+                
+                let entryDate = $(element).find('footer')
+                                          .find('div.info')
+                                          .find('a.entry-date.permalink')
+                                          .text()
+                                          .trim();
         
                 entryArray.push({
                     username,
@@ -24,7 +30,8 @@ const getUserEntries = (username) => {
                     entryTitle,
                     entryTitleId,
                     entryId,
-                    entry
+                    entry,
+                    entryDate
                 })
             });
             
