@@ -1,6 +1,7 @@
 const fs = require('fs');
-
 const {getUserEntries} = require('./getAllUserEntries');
+
+const username = 'sekilli nick'
 
 getUserEntries(username).then((entries) => {
     let jsonString = JSON.stringify(entries, null, 2);
