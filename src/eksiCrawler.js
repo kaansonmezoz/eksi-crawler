@@ -1,7 +1,14 @@
 const fs = require('fs');
 const {getUserEntries} = require('./getAllUserEntries');
+const yargs = require('yargs');
 
-const username = 'sekilli nick'
+yargs.option('username', {
+    alias: 'u', 
+    describe: 'Whose entries are going to be fetch'
+})
+.demandOption(['username']);
+
+const username = yargs.argv['username'];
 
 getUserEntries(username).then((entries) => {
     let jsonString = JSON.stringify(entries, null, 2);
