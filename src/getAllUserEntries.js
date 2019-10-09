@@ -34,9 +34,8 @@ const getUserEntries = (username) => {
                     entryDate
                 })
             });
+            console.log('Entries have been downloaded !');        
             
-            console.log('Entries have been downloaded !');
-
             resolve(entryArray);
         })
         .catch((err) => {
