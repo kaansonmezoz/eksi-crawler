@@ -16,7 +16,7 @@ const loadAllEntries = (username) => {
             
             console.log('Link: ' + url);
 
-            //await page.goto(url, { waitUntil: 'networkidle0'});        
+            await page.goto(url, { waitUntil: 'networkidle0'});        
             await pendingXHR.waitForAllXhrFinished();
             
             let entryCount = await page.$eval('div#profile-stats-sections small', (element) => {
